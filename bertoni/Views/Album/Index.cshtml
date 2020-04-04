@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AlbumDto>
+@{
+    ViewData["Title"] = "Albums";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Página principal del listado de albums</p>
+
+<table class="table table-bordered">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td><a href="~/album/detail/@item.Id">Visualizar</a></td>
+        </tr>
+    }
+
+</table>
+
