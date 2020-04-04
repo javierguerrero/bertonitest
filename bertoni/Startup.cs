@@ -38,6 +38,7 @@ namespace KodotiMvcClient
             services.AddTransient<ProxyHttpClient>();
             services.AddTransient<AlbumProxy, AlbumProxy>();
             services.AddTransient<PhotoProxy, PhotoProxy>();
+            services.AddTransient<CommentProxy, CommentProxy>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

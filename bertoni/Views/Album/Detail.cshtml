@@ -13,10 +13,48 @@
     <tr>
         <td>@item.Title</td>
         <td><img src="@item.ThumbnailUrl" /></td>
-        <td><a href="~/album/detail/@item.Id">Ver comentarios</a></td>
+        <td><a onclick="LoadComments(@item.Id)">Ver comentarios</a> - (@item.Id)</td>
     </tr>
     }
 
 </table>
 
-//ver comentarios ajax
+
+
+<h4>Comentarios</h4>
+
+<a href="#goto" id="goto"></a>
+<table class="table table-bordered" id="comments">
+    <tbody></tbody>
+</table>
+<script type="text/javascript">
+    function LoadComments(id) {
+        $.ajax({
+            type: 'GET',
+            url: '/album/comments/' + id,
+            dataType: 'json',
+            data: { id: '' },
+            success: function (data) {
+                $('#comments tbody tr').remove();
+                $.each(data, function (i, item) {
+                    var rows = "<tr>"
+                    + "<td class='prtoducttd'>" + item.name + "</td>"
+                    + "<td class='prtoducttd'>" + item.body + "</td>"
+                    + "</tr>";
+                    $('#comments tbody').append(rows);
+                });
+
+                //e.preventDefault();
+                var aid = $('#goto').attr("href");
+                $('html,body').animate({ scrollTop: $(aid).offset().top }, 'fast');
+            },
+            error: function (ex) {
+                alert(ex);
+            }
+        });
+        return false;
+    }
+</script>
+
+
+
